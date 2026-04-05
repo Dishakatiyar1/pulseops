@@ -16,6 +16,7 @@ function getPoolConfig() {
       database: parsed.pathname?.slice(1) || "pulseops",
       max: 10,
       idleTimeoutMillis: 30000,
+      ssl: { rejectUnauthorized: false },
     };
   } catch {
     return {
