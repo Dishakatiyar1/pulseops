@@ -1,4 +1,11 @@
-import React, { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 
 const WsContext = createContext(null);
 
@@ -10,7 +17,7 @@ export function WsProvider({ children }) {
   const reconnectTimer = useRef(null);
 
   const connect = useCallback(() => {
-    const url = `ws://localhost:5000/ws`;
+    const url = import.meta.env.VITE_WS_URL || "ws://localhost:5000/ws";
     ws.current = new WebSocket(url);
 
     ws.current.onopen = () => {
@@ -21,12 +28,14 @@ export function WsProvider({ children }) {
     ws.current.onmessage = (e) => {
       try {
         const data = JSON.parse(e.data);
-        setEvents(prev => [{ ...data, _id: Date.now() + Math.random() }, ...prev].slice(0, 100));
+        setEvents((prev) =>
+          [{ ...data, _id: Date.now() + Math.random() }, ...prev].slice(0, 100),
+        );
         const handlers = listeners.current[data.type] || [];
-        handlers.forEach(fn => fn(data));
+        handlers.forEach((fn) => fn(data));
         // also call wildcard listeners
-        const wildcards = listeners.current['*'] || [];
-        wildcards.forEach(fn => fn(data));
+        const wildcards = listeners.current["*"] || [];
+        wildcards.forEach((fn) => fn(data));
       } catch (_) {}
     };
 
@@ -52,7 +61,7 @@ export function WsProvider({ children }) {
     if (!listeners.current[type]) listeners.current[type] = [];
     listeners.current[type].push(fn);
     return () => {
-      listeners.current[type] = listeners.current[type].filter(f => f !== fn);
+      listeners.current[type] = listeners.current[type].filter((f) => f !== fn);
     };
   }, []);
 
