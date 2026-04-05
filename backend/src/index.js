@@ -26,6 +26,7 @@ app.use(
     origin: [
       "http://localhost:5173",
       "https://dishakatiyar1-pulseops.vercel.app",
+      "https://pulseops-chi.vercel.app",
     ],
     credentials: true,
   }),
