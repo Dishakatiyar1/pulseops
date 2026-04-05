@@ -21,7 +21,15 @@ const PORT = process.env.PORT || 5000;
 // serurity middlewares
 app.use(helmet());
 app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 })); // 100 requests per 15 minutes
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://dishakatiyar1-pulseops.vercel.app",
+    ],
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // Health
