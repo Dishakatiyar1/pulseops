@@ -19,16 +19,16 @@ BEGIN
 
   RAISE NOTICE 'Seeding gyms...';
   INSERT INTO gyms (name, city, capacity, opens_at, closes_at, status) VALUES
-    ('PulseOps — Lajpat Nagar', 'New Delhi', 220, '05:30', '22:30', 'active'),
-    ('PulseOps — Connaught Place', 'New Delhi', 180, '06:00', '22:00', 'active'),
-    ('PulseOps — Bandra West', 'Mumbai', 300, '05:00', '23:00', 'active'),
-    ('PulseOps — Powai', 'Mumbai', 250, '05:30', '22:30', 'active'),
-    ('PulseOps — Indiranagar', 'Bengaluru', 200, '05:30', '22:00', 'active'),
-    ('PulseOps — Koramangala', 'Bengaluru', 180, '06:00', '22:00', 'active'),
-    ('PulseOps — Banjara Hills', 'Hyderabad', 160, '06:00', '22:00', 'active'),
-    ('PulseOps — Sector 18 Noida', 'Noida', 140, '06:00', '21:30', 'active'),
-    ('PulseOps — Salt Lake', 'Kolkata', 120, '06:00', '21:00', 'active'),
-    ('PulseOps — Velachery', 'Chennai', 110, '06:00', '21:00', 'active');
+    ('PulseOps - Lajpat Nagar', 'New Delhi', 220, '05:30', '22:30', 'active'),
+    ('PulseOps - Connaught Place', 'New Delhi', 180, '06:00', '22:00', 'active'),
+    ('PulseOps - Bandra West', 'Mumbai', 300, '05:00', '23:00', 'active'),
+    ('PulseOps - Powai', 'Mumbai', 250, '05:30', '22:30', 'active'),
+    ('PulseOps - Indiranagar', 'Bengaluru', 200, '05:30', '22:00', 'active'),
+    ('PulseOps - Koramangala', 'Bengaluru', 180, '06:00', '22:00', 'active'),
+    ('PulseOps - Banjara Hills', 'Hyderabad', 160, '06:00', '22:00', 'active'),
+    ('PulseOps - Sector 18 Noida', 'Noida', 140, '06:00', '21:30', 'active'),
+    ('PulseOps - Salt Lake', 'Kolkata', 120, '06:00', '21:00', 'active'),
+    ('PulseOps - Velachery', 'Chennai', 110, '06:00', '21:00', 'active');
 
   SELECT array_agg(id ORDER BY name) INTO v_gyms FROM gyms;
   SELECT id INTO v_bandra_id FROM gyms WHERE name = 'PulseOps — Bandra West';
