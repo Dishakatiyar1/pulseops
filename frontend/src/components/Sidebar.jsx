@@ -14,6 +14,12 @@ const navItems = [
 export default function Sidebar({ anomalyCount = 0 }) {
   const { connected } = useWs();
 
+  const logout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "/login";
+  };
+
   return (
     <aside
       className="fixed left-0 top-0 h-screen w-16 lg:w-56 flex flex-col z-40"
@@ -85,6 +91,34 @@ export default function Sidebar({ anomalyCount = 0 }) {
           </NavLink>
         ))}
       </nav>
+
+      <div className="px-3 lg:px-5 pb-2 border-t border-white/5 pt-3">
+        <div className="hidden lg:flex items-center gap-2 mb-2">
+          <div
+            className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+            style={{ background: "linear-gradient(135deg, #f97316, #c2410c)" }}
+          >
+            {JSON.parse(
+              localStorage.getItem("user") || "{}",
+            )?.name?.[0]?.toUpperCase() || "U"}
+          </div>
+          <div className="min-w-0">
+            <div className="text-xs font-medium text-slate-300 truncate">
+              {JSON.parse(localStorage.getItem("user") || "{}")?.name || "User"}
+            </div>
+            <div className="text-xs text-slate-600 truncate">
+              {JSON.parse(localStorage.getItem("user") || "{}")?.role ||
+                "manager"}
+            </div>
+          </div>
+        </div>
+        <button
+          onClick={logout}
+          className="w-full text-left text-xs font-mono text-slate-600 hover:text-red-400 transition-colors py-1"
+        >
+          → LOGOUT
+        </button>
+      </div>
 
       {/* WS Status */}
       <div className="px-3 lg:px-5 py-4 border-t border-white/5">
